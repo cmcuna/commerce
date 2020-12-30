@@ -1,0 +1,57 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h2>Add New Listing</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'newlisting' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="title" placeholder="Item">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="description" placeholder="Description">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="price" placeholder="Price">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="condition" placeholder="Item Condition">
+        </div>
+        <div class="form-group">
+            <!-- <input class="form-control" type="text" name="category" placeholder="Category"> -->
+            <!-- can't get drop down list to work that pulls in from database...what is wrong ?  have to write in 'option values' for now..possibly need jquery/css/javascript to add this 'dropdown' function -->
+            <select name="category" id="category" class="form-control">
+                <option disabled="true" selected>Category</option>
+                
+                <option value="Accessories">Accessories</option>
+                <option value="Arts and Crafts">Arts and Crafts</option> 
+                <option value="Sports">Sports</option> 
+                <option value="Fitness">Fitness</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Health">Health</option> 
+                <option value="Pets">Pets</option> 
+                <option value="Entertainment">Entertainment</option>
+                <option value="Video Games">Video Games</option> 
+                <option value="Shoes">Shoes</option> 
+                <option value="Clothing">Clothing</option> 
+                <option value="Cars">Cars</option> 
+                <option value="Other">Other</option> 
+                <option value=""></option>
+                <!--
+                {% for cat in cats %} 
+                    <option value="{{ cat.cat }}">{{ cat.cat }}</option> 
+                {% endfor %} 
+                -->
+            </select>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Submit Listing">
+    </form>
+
+    View active listings ? <a href="{% url 'index' %}">Click here.</a>
+    
+{% endblock %}

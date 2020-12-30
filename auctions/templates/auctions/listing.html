@@ -1,0 +1,42 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h1>Listing #{{ listing.id }}</h1>
+    <ul>
+        <li>Title: {{ listing.title }}</li>
+        <li>Price: {{ listing.price }}</li>
+        <li>Description: {{ listing.description }}</li>
+    </ul>
+
+    <!-- this is the error comment/message -->
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <div>
+        {% if user.is_authenticated %}
+            <strong>{{ count }}</strong> Comments: 
+            <form action="{% url 'listing' listing.id %}" method="post">
+            {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" autofocus type="text" name="comment" placeholder="Add a public comment...">
+                </div>
+            <input class="btn btn-primary" type="submit" value="Comment">
+            </form>
+            
+            <ul>
+                {% for comment in comments %}
+                    <li>{{ comment }}</li>
+                {% empty %}
+                    <li>No Comments.</li>
+                {% endfor %}
+            </ul>
+            
+        {% else %}
+            <!-- blank: not displaying any info/comments if user is not logged in -->
+        {% endif %}
+    </div>
+
+    <a href="{% url 'index' %}">All Auction Listings</a>
+{% endblock %}

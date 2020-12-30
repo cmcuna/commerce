@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h1>{{ catagoryTitle }}</h1>
+
+    <!-- this is the error comment/message -->
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <div>
+        {% if user.is_authenticated %}
+            <ul>
+                {% for cat in category %}
+                    <li><a href="{% url 'listing' cat.id %}">{{ cat.title }}</a></li>
+                {% empty %}
+                    <li>No Listings.</li>
+                {% endfor %}
+            </ul>
+            
+        {% else %}
+            <!-- blank: not displaying any info/comments if user is not logged in -->
+        {% endif %}
+    </div>
+
+    <a href="{% url 'index' %}">All Auction Listings</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h1>Watchlist</h1>
+
+    <!-- this is the error comment/message -->
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <div>
+        {% if user.is_authenticated %}
+            <ul>
+                {% for item in watchlist %}
+                    <li><a href="{% url 'listing' item.id %}">{{ item }}</a></li>
+                {% empty %}
+                    <li>No Listings.</li>
+                {% endfor %}
+            </ul>
+            
+        {% else %}
+            <!-- blank: not displaying any info/comments if user is not logged in -->
+        {% endif %}
+    </div>
+
+    <a href="{% url 'index' %}">All Auction Listings</a>
+{% endblock %}

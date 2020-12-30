@@ -1,0 +1,13 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h2>Success!</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    Sell another item ? <a href="{% url 'newlisting' %}">Click here.</a>
+
+{% endblock %}
