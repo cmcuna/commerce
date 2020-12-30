@@ -5,7 +5,7 @@
     <h1>Listing #{{ listing.id }}</h1>
     <ul>
         <li>Title: {{ listing.title }}</li>
-        <li>Price: {{ listing.price }}</li>
+        <li>Price: ${{ listing.price|floatformat:2 }}</li>
         <li>Description: {{ listing.description }}</li>
     </ul>
 
