@@ -18,10 +18,18 @@ class Listing(models.Model):
     #category = models.CharField(max_length=64)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="CategoryList")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="UserList")
-    #picture = models.ImageField()
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return f"Title: {self.title}    Desc: {self.description}    Price: {self.price}"
+
+    @property #this lets us access as property and not as attribute.
+    def imageURL(self): #function to error handle page error when an image url is not defined. 'imageURL' is now our attribute name (aka Listing.imageURL)
+        try:
+            url = self.image.url #first, query the url
+        except:
+            url = '' #if no url for image, give it an empty string that way we can still render image field
+        return url
 
 class Comment(models.Model):
     comment = models.CharField(max_length=164)
